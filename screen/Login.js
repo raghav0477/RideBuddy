@@ -25,14 +25,24 @@
     }
     return (
       <View style={styles.container}>
-      <Logo/>
-        <Text style={{ fontWeight: "bold", fontSize: 24, marginBottom: 10, fontFamily:'Gilroybold' }}>Welcome back!</Text>
+        <Logo />
+        <Text
+          style={{
+            fontWeight: "bold",
+            fontSize: 24,
+            marginBottom: 10,
+            fontFamily: "Gilroybold",
+          }}
+        >
+          Welcome back!
+        </Text>
         <View style={styles.inputBox}>
           <TextInput
             style={styles.textInput}
             placeholder="Email"
             onChangeText={(email) => setEmail(email)}
             autoCapitalize="none"
+            // textAlign="left"
             autoCorrect={false}
           />
           <TextInput
@@ -42,6 +52,7 @@
             autoCapitalize="none"
             autoCorrect={false}
             secureTextEntry={true}
+            // textAlign="right"
           />
         </View>
         <TouchableOpacity

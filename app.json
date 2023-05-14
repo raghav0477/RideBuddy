@@ -4,10 +4,10 @@
     "slug": "RideBuddy",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/OG.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/OG.png",
+      "image": "./assets/favicon_io/favicon.ico",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -24,7 +24,7 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.ico"
     }
   }
 }
