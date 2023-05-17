@@ -11,9 +11,10 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+      "packagerOpts": {
+      "assetExts": ["ico"]
+    },
     "ios": {
       "supportsTablet": true
     },

@@ -1,4 +1,4 @@
-  import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
+  import { View, Text, TouchableOpacity, TextInput, StyleSheet, Alert } from 'react-native'
   import React,{useState} from 'react';
   import { useNavigation } from '@react-navigation/native';
   import {firebase} from '../config'
@@ -18,17 +18,28 @@
       }
     }
     const [fontsLoaded] = useFonts({
-      Gilroybold: require('../assets/fonts/Gilroy-Bold.ttf'),
+      Gilroybold: require("../assets/fonts/Gilroy-Bold.ttf"),
+      Gilroymid: require("../assets/fonts/Gilroy-Medium.ttf"),
     });
     if (!fontsLoaded) {
       return null;
     }
+
+    //Forget Password
+    const forgetPassword = () =>{
+      firebase.auth().sendPasswordResetEmail(email)
+      .then(() => {
+        alert("Password reset email sent")
+      }).catch((error) =>{
+        alert(error)
+      })
+    }
+
     return (
       <View style={styles.container}>
         <Logo />
         <Text
           style={{
-            fontWeight: "bold",
             fontSize: 24,
             marginBottom: 10,
             fontFamily: "Gilroybold",
@@ -59,7 +70,15 @@
           onPress={() => loginUser(email, password)}
           style={styles.button}
         >
-          <Text style={{ fontWeight: "bold", fontSize: 22 }}>Login</Text>
+          <Text
+            style={{
+              fontSize: 22,
+              fontFamily: "Gilroybold",
+              color: "#fff",
+            }}
+          >
+            Login
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => navigation.navigate("Registration")}
@@ -67,6 +86,16 @@
         >
           <Text style={{ fontWeight: "normal", fontSize: 18 }}>
             Don't have an account?
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            forgetPassword();
+          }}
+          style={{ marginTop: 20 }}
+        >
+          <Text style={{ fontWeight: "normal", fontSize: 18 }}>
+            Forgot Password?
           </Text>
         </TouchableOpacity>
       </View>
@@ -82,30 +111,30 @@
       alignItems: "center",
       marginTop: 5,
     },
-    inputBox: {
-      borderColor: "#000",
-      width: 40,
-      alignItems: "center",
-    },
+    // inputBox: {
+    //   borderColor: "#000",
+    //   width: 40,
+    //   alignItems: "center",
+    // },
     textInput: {
       paddingTop: 10,
       paddingBottom: 10,
-      width: 250,
+      width: 300,
       fontSize: 20,
       borderWidth: 1,
       borderRadius: 10,
       borderColor: "#808080",
-      borderBottomColor: "#000",
       textAlign: "center",
       marginBottom: 15,
     },
     button: {
       marginTop: 30,
-      height: 60,
-      width: 230,
+      height: 55,
+      width: 180,
       backgroundColor: "#026efd",
       alignItems: "center",
       justifyContent: "center",
       borderRadius: 15,
+      color: '#fff'
     },
   });

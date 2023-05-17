@@ -13,7 +13,7 @@ const Registeration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  // const [lastName, setLastName] = useState("");
 
   registerUser = async (email, password, firstName, lastName) => {
     await firebase
@@ -54,21 +54,23 @@ const Registeration = () => {
 
   return (
     <View style={styles.container}>
-    <Logo/>
-      <Text style={{ fontWeight: "bold", fontSize: 23 }}>Create a New Account..</Text>
+      <Logo />
+      <Text style={{ fontWeight: "bold", fontSize: 23 }}>
+        Create a New Account..
+      </Text>
       <View style={{ marginTop: 25 }}>
         <TextInput
           style={styles.textInput}
-          placeholder="First Name"
+          placeholder="Enter Your Name"
           onChangeText={(firstName) => setFirstName(firstName)}
           autoCorrect={false}
         />
-        <TextInput
+        {/* <TextInput
           style={styles.textInput}
           placeholder="Last Name"
           onChangeText={(lastName) => setLastName(lastName)}
           autoCorrect={false}
-        />
+        /> */}
         <TextInput
           style={styles.textInput}
           placeholder="Email"
@@ -90,7 +92,15 @@ const Registeration = () => {
         onPress={() => registerUser(email, password, firstName, lastName)}
         style={styles.button}
       >
-        <Text style={{ fontWeight: "semibold", fontSize: 20 }}> Register</Text>
+        <Text
+          style={{
+            fontSize: 22,
+            fontFamily: "Gilroybold",
+            color: "#fff",
+          }}
+        >
+          Register Now
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -101,29 +111,29 @@ export default Registeration;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: "center",
     alignItems: "center",
-    marginTop: 80,
+    marginTop: 5,
   },
   textInput: {
     paddingTop: 10,
     paddingBottom: 10,
-    paddingLeft: 10,
-    width: 250,
+    width: 300,
     fontSize: 20,
     borderWidth: 1,
     borderRadius: 10,
-    borderBottomColor: "#000",
-    textAlign: "left",
+    borderColor: "#808080",
+    textAlign: "center",
     marginBottom: 15,
   },
   button: {
-    fontWeight: 400,
     marginTop: 30,
-    padding: 10,
-    width: 230,
+    height: 55,
+    width: 180,
     backgroundColor: "#026efd",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 15,
+    color: "#fff",
   },
 });

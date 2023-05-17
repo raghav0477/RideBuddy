@@ -1,11 +1,10 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import React, { useState, useEffect } from "react";
 import { firebase } from "./config";
 import { store } from "./store";
-import {useFonts} from 'expo-font'
 import Login from "./screen/Login";
 import Registeration from "./screen/Registeration";
 import HomeScreen from "./screen/HomeScreen";
@@ -13,6 +12,7 @@ import MapScreen from "./screen/MapScreen";
 
 import { Provider } from "react-redux";
 import RiderScreen from "./components/RiderScreen";
+import Logo2 from "./components/Logo2";
 
 const Stack = createStackNavigator();
 function App() {
@@ -47,22 +47,33 @@ function App() {
       </Stack.Navigator>
     );
   }
+  function LogoTitle() {
+    return (
+      <Image
+        style={{ width: 80, height: 18 }}
+        source={require("./assets/OGFull.png")}
+      />
+    );
+  }
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
-        options={{ headerShown: false }}
+        options={{
+          headerTitle: (props) => <LogoTitle {...props} />,
+          // headerRight: () => <Icon name="user" type="font-awesome" />,
+        }}
       />
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
-        options={{ headerShown: false }}
+        // options={{ headerShown: false }}
       />
       <Stack.Screen
         name="RiderScreen"
         component={RiderScreen}
-        options={{ headerShown: false }}
+        // options={{ }}
       />
     </Stack.Navigator>
   );
