@@ -7,13 +7,17 @@
     "icon": "./assets/OG.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/favicon_io/favicon.ico",
+      "image": "./assets/favicon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
-      "packagerOpts": {
-      "assetExts": ["ico"]
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "packagerOpts": {
+      "assetExts": [
+        "ico"
+      ]
     },
     "ios": {
       "supportsTablet": true
@@ -22,10 +26,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/OG.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.raghav_04.RideBuddy"
     },
     "web": {
-      "favicon": "./assets/favicon.ico"
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "4f211a1a-d7de-4b0d-85ed-63f333b5da89"
+      }
     }
   }
 }

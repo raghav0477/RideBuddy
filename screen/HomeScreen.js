@@ -99,7 +99,8 @@ import {
   TouchableOpacity,
   DrawerLayoutAndroid,
 } from "react-native";
-import tw from "tailwind-react-native-classnames";
+// import tw from "tailwind-react-native-classnames";
+import tw from "twrnc"
 import NavOptions from '../components/NavOptions'
 import MapScreen from "./MapScreen";
 import React, {useState, useEffect, useRef} from 'react'
