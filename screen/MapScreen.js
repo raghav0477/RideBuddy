@@ -4,7 +4,6 @@ import {
   View,
   SafeAreaView,
   TouchableOpacity,
-  Alert,
   Pressable,
   Modal,
 } from "react-native";
@@ -14,6 +13,7 @@ import tw from "tailwind-react-native-classnames";
 import PassengerOptions from "../components/PassengerOptions";
 import * as Location from "expo-location";
 import Driverinfo from "../components/Driverinfo";
+import { useFonts } from "expo-font";
 
 const MapScreen = () => {
   const [mapRegion, setMapRegion] = useState({
@@ -22,6 +22,7 @@ const MapScreen = () => {
     latitudeDelta: 0.0922,
     longitudeDelta: 0.0421,
   });
+
   const usersLocation = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -44,32 +45,34 @@ const MapScreen = () => {
 
   const [modalVisible, setModalVisible] = useState(false);
 
+  const [fontsLoaded] = useFonts({
+    Gilroybold: require("../assets/fonts/Gilroy-Bold.ttf"),
+    Gilroymid: require("../assets/fonts/Gilroy-Medium.ttf"),
+  });
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <SafeAreaView style={tw`items-center flex-1 mt-10`}>
       <View>
         <MapView style={tw`h-80 w-80`} region={mapRegion}>
           <Marker coordinate={mapRegion} />
         </MapView>
-        {/* <MapView
-          style={tw`h-80 w-80`}
-          initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          }}
-        /> */}
       </View>
       <View style={tw`w-80`}>
+        {/* <Text style={tw`items-center text-xl font-bold`}>Select a Rider</Text> */}
+
         <Pressable
           style={[styles.button, styles.buttonOpen]}
           onPress={() => setModalVisible(true)}
         >
-          <Text style={styles.textStyle}>Show Modal</Text>
+          <Text style={styles.textStyle}>Update Information</Text>
         </Pressable>
+        <Text style={tw`items-center text-xl font-bold`}>Select a Rider</Text>
 
         <PassengerOptions />
-        <Text>Location:{JSON.stringify(mapRegion)}</Text>
+        {/* <Text>Location:{JSON.stringify(mapRegion)}</Text> */}
       </View>
 
       <Modal
@@ -77,20 +80,43 @@ const MapScreen = () => {
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
           setModalVisible(!modalVisible);
         }}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Hello World!</Text>
-            <Driverinfo />
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={{ color: "#000" }}
               onPress={() => setModalVisible(!modalVisible)}
             >
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text
+                style={[
+                  {
+                    color: "#000",
+                    fontSize: 20,
+                    position: "absolute",
+                    top: -20,
+                    right: -130,
+                    padding: 5,
+                  },
+                ]}
+              >
+                X
+              </Text>
             </Pressable>
+            <Text style={styles.modalText}>Update Your Information</Text>
+            <Text
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontFamily: "Gilroymid",
+                fontSize: 16,
+              }}
+            >
+              Drivers{" "}
+            </Text>
+
+            <Driverinfo />
           </View>
         </View>
       </Modal>
@@ -109,6 +135,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
+    height: 350,
     backgroundColor: "white",
     borderRadius: 20,
     padding: 30,
@@ -123,24 +150,29 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
     elevation: 2,
-    marginTop: 5
+    marginTop: 8,
+    width: 220,
+    alignSelf: "center"
   },
   buttonOpen: {
-    backgroundColor: "#F194FF",
+    backgroundColor: "#026efd",
   },
   buttonClose: {
-    backgroundColor: "#2196F3",
+    backgroundColor: "#026efd",
   },
   textStyle: {
     color: "white",
     fontWeight: "bold",
     textAlign: "center",
+    fontSize: 17,
   },
   modalText: {
-    marginBottom: 15,
+    // marginBottom: 15,
+    fontSize: 18,
     textAlign: "center",
+    fontFamily: "Gilroybold",
   },
 });

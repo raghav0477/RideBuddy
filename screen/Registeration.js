@@ -15,7 +15,7 @@ const Registeration = () => {
   const [firstName, setFirstName] = useState("");
   // const [lastName, setLastName] = useState("");
 
-  registerUser = async (email, password, firstName, lastName) => {
+  registerUser = async (email, password, firstName) => {
     await firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -39,7 +39,7 @@ const Registeration = () => {
               .doc(firebase.auth().currentUser.uid)
               .set({
                 firstName,
-                lastName,
+                // lastName,
                 email,
               });
           })
@@ -89,7 +89,7 @@ const Registeration = () => {
         />
       </View>
       <TouchableOpacity
-        onPress={() => registerUser(email, password, firstName, lastName)}
+        onPress={() => registerUser(email, password, firstName)}
         style={styles.button}
       >
         <Text

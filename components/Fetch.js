@@ -6,17 +6,18 @@ import { Pressable } from 'react-native';
 
 const Fetch = () => {
     const [users, setUsers] = useState([])
-    const fetchData = firebase.firestore().collection('users');
+    const fetchData = firebase.firestore().collection("passengers");
     useEffect(() => {
      fetchData
      .onSnapshot(
         querySnapshot =>{
             const users = []
             querySnapshot.forEach((doc) => {
-                const {firstName} = doc.data()
+                const {firstName,location} = doc.data()
                 users.push({
                     id: doc.id,
-                    firstName
+                    firstName,
+                    location                 
                 })
             });
             setUsers(users)
@@ -34,8 +35,8 @@ const Fetch = () => {
         renderItem={({ item }) => (
           <Pressable>
             <View>
-              <Text>{item.firstName}</Text>
-              <Text>{item.firstName}</Text>
+              <Text>Hello {item.firstName}</Text>
+              <Text>{item.location}</Text>
             </View>
           </Pressable>
         )}

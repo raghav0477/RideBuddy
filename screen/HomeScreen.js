@@ -161,12 +161,12 @@ const HomeScreen = () => {
         <NavOptions />
         {/* <Fetch /> */}
       </View>
-      <View>
+      {/* <View>
         <MapView style={styles.map} region={mapRegion}>
           <Marker coordinate={mapRegion} />
         </MapView>
         <Button title="get" onPress={usersLocation} />
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 };
