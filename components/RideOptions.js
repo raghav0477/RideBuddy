@@ -14,7 +14,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import tw from "tailwind-react-native-classnames";
-import { AntDesign } from "@expo/vector-icons";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useFonts } from "expo-font";
 
@@ -24,12 +23,14 @@ const data = [
     name: "Rohan",
     type: "Car",
     seats: "3",
+    destination: "Bakshi Nagar",
     image: require("../assets/person2.jpg"),
   },
   {
     id: "456",
     name: "Mohit",
     type: "Bike",
+    destination: "Gandhi Nagar",
     seats: "1",
     image: require("../assets/person1.jpg"),
   },
@@ -92,6 +93,9 @@ const openPopup = () => {
             </Text>
             <Text style={{ fontFamily: "Gilroymid" }}>
               Available Seats: {item.seats}
+            </Text>
+            <Text style={{ fontFamily: "Gilroymid" }}>
+              Destination: {item.destination}
             </Text>
           </View>
         </View>

@@ -37,7 +37,7 @@ const MapScreen = () => {
       latitudeDelta: 0.922,
       longitudeDelta: 0.0421,
     });
-    console.log(location.coords.latitude, location.coords.longitude);
+    // console.log(location.coords.latitude, location.coords.longitude);
   };
   useEffect(() => {
     usersLocation();
@@ -135,10 +135,10 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    height: 350,
+    height: 400,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 30,
+    padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {

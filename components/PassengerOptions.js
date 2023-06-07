@@ -21,12 +21,14 @@ const data = [
     name: "Arun",
     location: "Ban Talab",
     image: require("../assets/person1.jpg"),
+    destination: "MIET",
   },
   {
     id: "456",
     name: "Muskan",
     location: "Janipur",
     image: require("../assets/person3.jpg"),
+    destination: "MIET",
   },
 ];
 
@@ -87,6 +89,9 @@ const openPopup = () => {
             <Text style={{ fontFamily: "Gilroymid" }}>
               Location: {item.location}
             </Text>
+            <Text style={{ fontFamily: "Gilroymid" }}>
+              Destination: {item.destination}
+            </Text>
           </View>
         </View>
         <View
@@ -118,7 +123,7 @@ const openPopup = () => {
                 <Text style={{ color: "#fff", fontSize: 16 }}>Offer</Text>
               </Animated.View>
             </Pressable>
-            <Pressable onPress={openPopup }>
+            <Pressable onPress={openPopup}>
               <Animated.View
                 style={[
                   styles.btn,

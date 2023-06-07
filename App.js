@@ -51,7 +51,7 @@ function App() {
     return (
       <Image
         style={{ width: 80, height: 18 }}
-        source={require("./assets/OGFull.png")}
+        source={require("./assets/OG_copy.png")}
       />
     );
   }
@@ -62,13 +62,12 @@ function App() {
         component={HomeScreen}
         options={{
           headerTitle: (props) => <LogoTitle {...props} />,
-          // headerRight: () => <Icon name="user" type="font-awesome" />,
         }}
       />
       <Stack.Screen
         name="MapScreen"
         component={MapScreen}
-        // options={{ headerShown: false }}
+        options={{ headerTitle: "Driver Screen" }}
       />
       <Stack.Screen
         name="RiderScreen"

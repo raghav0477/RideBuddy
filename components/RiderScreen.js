@@ -4,8 +4,7 @@ import tw from "tailwind-react-native-classnames";
 import MapView, { Marker } from "react-native-maps";
 import RideOptions from "./RideOptions";
 import * as Location from "expo-location";
-import Driverinfo from "./Driverinfo";
-
+import PassengerInfo from "./PassengerInfo";
 const RiderScreen = () => {
   const [mapRegion, setMapRegion] = useState({
     latitude: 32.7266,
@@ -29,7 +28,7 @@ const RiderScreen = () => {
       latitudeDelta: 0.922,
       longitudeDelta: 0.0421,
     });
-    console.log(location.coords.latitude, location.coords.longitude);
+    // console.log(location.coords.latitude, location.coords.longitude);
   };
   useEffect(() => {
     usersLocation();
@@ -82,8 +81,17 @@ const RiderScreen = () => {
               </Text>
             </Pressable>
             <Text style={styles.modalText}>Update Your Information </Text>
-            <Text style={{display:'flex', justifyContent:"center", fontFamily:'Gilroymid',fontSize:16}}>Passengers </Text>
-            <Driverinfo />
+            <Text
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontFamily: "Gilroymid",
+                fontSize: 16,
+              }}
+            >
+              Passengers{" "}
+            </Text>
+            <PassengerInfo />
           </View>
         </View>
       </Modal>
@@ -102,10 +110,10 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    height: 350,
+    height: 400,
     backgroundColor: "white",
     borderRadius: 20,
-    padding: 30,
+    padding: 35,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
