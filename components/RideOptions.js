@@ -16,6 +16,8 @@ import React, { useState } from "react";
 import tw from "tailwind-react-native-classnames";
 import Icon from "react-native-vector-icons/AntDesign";
 import { useFonts } from "expo-font";
+import { useNavigation } from "@react-navigation/native";
+import Fetch from "./Fetch";
 
 const data = [
   {
@@ -42,6 +44,7 @@ const [modalVisible, setModalVisible] = useState(false);
   const toggleOptions = (itemId) => {
     setShowOptions(itemId === showOptions ? null : itemId);
   };
+    const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     Gilroybold: require("../assets/fonts/Gilroy-Bold.ttf"),
     Gilroymid: require("../assets/fonts/Gilroy-Medium.ttf"),
@@ -125,10 +128,10 @@ const openPopup = () => {
                   { backgroundColor: "#026efd", opacity: animated },
                 ]}
               >
-                <Text style={{ color: "#fff", fontSize: 16 }}>Request</Text>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Information</Text>
               </Animated.View>
             </Pressable>
-            <Pressable onPress={openPopup}>
+            {/* <Pressable onPress={openPopup}>
               <Animated.View
                 style={[
                   styles.btn,
@@ -139,7 +142,7 @@ const openPopup = () => {
               >
                 <Text style={{ color: "#026efd", fontSize: 16 }}>Chat</Text>
               </Animated.View>
-            </Pressable>
+            </Pressable> */}
           </View>
         )}
       </TouchableOpacity>
@@ -183,13 +186,82 @@ return (
           </Pressable>
           <View style={{ display: "flex", alignItems: "center" }}>
             <Text style={styles.modalText}>Request Sent!!</Text>
-            <Image
+            {/* <Image
               style={{ width: 100, height: 100, margin: 10 }}
               source={require("../assets/tick.png")}
             />
             <Text style={[styles.modalText, { fontFamily: "Gilroymid" }]}>
               Waiting for the confirmation{" "}
-            </Text>
+            </Text> */}
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                // alignItems: "center",
+              }}
+            >
+              <View style={{ marginLeft: 0, marginTop: 5 }}>
+                <Text style={styles.etcInfo}>Current Location: Ban Talab</Text>
+                <Text style={styles.etcInfo}>Destination: Bakshi Nagar</Text>
+                <Text style={styles.etcInfo}>Vehicle Type: Car</Text>
+                <Text style={styles.etcInfo}>Vehicle Number: JKO2XY1234</Text>
+                <Text style={styles.etcInfo}>Approx ETA: 5 mins</Text>
+              </View>
+              <TouchableOpacity
+                // onPress={() => toggleOptions(item.id)}
+                style={[
+                  tw`mt-2 mb-2 p-4
+                `,
+                ]}
+              >
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                ></View>
+
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
+                  }}
+                >
+                  <Pressable
+                  // onPressIn={fadeIn}
+                  // // onPress={() => setModalVisible(true)}
+                  // onPressOut={fadeOut}
+                  >
+                    <Animated.View
+                      style={[
+                        styles.btn,
+                        { backgroundColor: "#026efd", opacity: animated },
+                      ]}
+                    >
+                      <Text style={{ color: "#fff", fontSize: 16 }}>
+                        Offer Ride
+                      </Text>
+                    </Animated.View>
+                  </Pressable>
+                  <Pressable onPress={() => navigation.navigate(Fetch)}>
+                    <Animated.View
+                      style={[
+                        styles.btn,
+                        {
+                          backgroundColor: "#fff",
+                        },
+                      ]}
+                    >
+                      <Text style={{ color: "#026efd", fontSize: 16 }}>
+                        Chat
+                      </Text>
+                    </Animated.View>
+                  </Pressable>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>

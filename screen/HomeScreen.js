@@ -19,6 +19,7 @@ import { GOOGLE_MAPS_APIKEY } from "@env";
 import Fetch from "../components/Fetch";
 import MapView, { Marker } from "react-native-maps";
 import * as Location from 'expo-location';
+// import ChatScreen from "./ChatScreen";
 // import {firebase } from '../config'
 
 
@@ -68,8 +69,9 @@ const HomeScreen = () => {
         </Text>
         <Text style={tw`pb-2 text-lg font-semibold`}>What are You Today??</Text>
         <NavOptions />
-        {/* <Fetch /> */}
       </View>
+        {/* <Fetch /> */}
+      {/* <ChatScreen/> */}
     </SafeAreaView>
   );
 };

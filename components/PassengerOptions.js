@@ -8,12 +8,13 @@ import {
   Image,
   TouchableOpacity,
   Modal,
-  Alert
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import tw from "tailwind-react-native-classnames";
 import { useFonts } from "expo-font";
 import Fetch from "./Fetch";
+import { useNavigation } from "@react-navigation/native";
 
 const data = [
   {
@@ -22,6 +23,8 @@ const data = [
     location: "Ban Talab",
     image: require("../assets/person1.jpg"),
     destination: "MIET",
+    vehicleType: "Car",
+    number: "JKO2XY1234",
   },
   {
     id: "456",
@@ -34,11 +37,11 @@ const data = [
 
 const PassengerOptions = () => {
   const [showOptions, setShowOptions] = useState(null);
-  const [modalVisible, setModalVisible] = useState(false)
+  const [modalVisible, setModalVisible] = useState(false);
   const toggleOptions = (itemId) => {
     setShowOptions(itemId === showOptions ? null : itemId);
   };
-
+  const navigation = useNavigation();
   const [fontsLoaded] = useFonts({
     Gilroybold: require("../assets/fonts/Gilroy-Bold.ttf"),
     Gilroymid: require("../assets/fonts/Gilroy-Medium.ttf"),
@@ -65,9 +68,9 @@ const PassengerOptions = () => {
       useNativeDriver: true,
     }).start();
   };
-const openPopup = () => {
-  Alert.alert("Opps!!", "This feature is not yet available.");
-};
+  // const openPopup = () => {
+  //   Alert.alert("Opps!!", "This feature is not yet available.");
+  // };
   const renderListItem = ({ item }) => (
     <View>
       <TouchableOpacity
@@ -120,10 +123,10 @@ const openPopup = () => {
                   { backgroundColor: "#026efd", opacity: animated },
                 ]}
               >
-                <Text style={{ color: "#fff", fontSize: 16 }}>Offer</Text>
+                <Text style={{ color: "#fff", fontSize: 16 }}>Details</Text>
               </Animated.View>
             </Pressable>
-            <Pressable onPress={openPopup}>
+            {/* <Pressable onPress={openPopup}>
               <Animated.View
                 style={[
                   styles.btn,
@@ -134,7 +137,7 @@ const openPopup = () => {
               >
                 <Text style={{ color: "#026efd", fontSize: 16 }}>Chat</Text>
               </Animated.View>
-            </Pressable>
+            </Pressable> */}
           </View>
         )}
       </TouchableOpacity>
@@ -178,14 +181,80 @@ const openPopup = () => {
               </Text>
             </Pressable>
             <View style={{ display: "flex", alignItems: "center" }}>
-              <Text style={styles.modalText}>Ride Offered!</Text>
-              <Image
+              <Text style={styles.modalText}>Driver Details</Text>
+              {/* <Image
                 style={{ width: 100, height: 100, margin: 10 }}
                 source={require("../assets/tick.png")}
               />
               <Text style={[styles.modalText, { fontFamily: "Gilroymid" }]}>
                 Waiting for the confirmation{" "}
-              </Text>
+              </Text> */}
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                // alignItems: "center",
+              }}
+            >
+              <View style={{ marginLeft: 0, marginTop: 5 }}>
+                <Text style={styles.etcInfo}>Current Location: Ban Talab</Text>
+                <Text style={styles.etcInfo}>Destination: MIET College</Text>
+              </View>
+              <TouchableOpacity
+                // onPress={() => toggleOptions(item.id)}
+                style={[
+                  tw`mt-2 mb-2 p-4
+                `,
+                ]}
+              >
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                ></View>
+
+                <View
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-evenly",
+                  }}
+                >
+                  <Pressable
+                  // onPressIn={fadeIn}
+                  // // onPress={() => setModalVisible(true)}
+                  // onPressOut={fadeOut}
+                  >
+                    <Animated.View
+                      style={[
+                        styles.btn,
+                        { backgroundColor: "#026efd", opacity: animated },
+                      ]}
+                    >
+                      <Text style={{ color: "#fff", fontSize: 16 }}>
+                        Set Ride
+                      </Text>
+                    </Animated.View>
+                  </Pressable>
+                  <Pressable onPress={() => navigation.navigate(Fetch)}>
+                    <Animated.View
+                      style={[
+                        styles.btn,
+                        {
+                          backgroundColor: "#fff",
+                        },
+                      ]}
+                    >
+                      <Text style={{ color: "#026efd", fontSize: 16 }}>
+                        Chat
+                      </Text>
+                    </Animated.View>
+                  </Pressable>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
@@ -253,5 +322,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: "center",
     fontFamily: "Gilroybold",
+  },
+  etcInfo: {
+    fontFamily: "Gilroymid",
+    fontSize: 15,
+    marginBottom: 5,
   },
 });

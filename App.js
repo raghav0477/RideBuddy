@@ -9,6 +9,7 @@ import Login from "./screen/Login";
 import Registeration from "./screen/Registeration";
 import HomeScreen from "./screen/HomeScreen";
 import MapScreen from "./screen/MapScreen";
+import Fetch from './components/Fetch'
 
 import { Provider } from "react-redux";
 import RiderScreen from "./components/RiderScreen";
@@ -74,6 +75,15 @@ function App() {
         component={RiderScreen}
         // options={{ }}
       />
+      {/* <Stack.Screen
+        name="Fetch"
+        component={Fetch}
+        // options={{ }}
+      >
+        {props => <Fetch {...props} user = {user} />}
+      </Stack.Screen> */}
+      <Stack.Screen name="Fetch"
+      component={Fetch}/>
     </Stack.Navigator>
   );
 }

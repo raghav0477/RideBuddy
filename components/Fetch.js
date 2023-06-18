@@ -1,106 +1,54 @@
-// import { StyleSheet, Text, View } from 'react-native'
-// import React,{useState, useEffect} from 'react';
-// import { firebase } from "../config";
-// import { FlatList } from 'react-native-gesture-handler';
-// import { Pressable } from 'react-native';
+import React, { useState, useCallback, useEffect } from "react";
+import { GiftedChat } from "react-native-gifted-chat";
 
-// const Fetch = () => {
-//     const [users, setUsers] = useState([])
-//     const fetchData = firebase.firestore().collection("passengers");
-//     useEffect(() => {
-//      fetchData
-//      .onSnapshot(
-//         querySnapshot =>{
-//             const users = []
-//             querySnapshot.forEach((doc) => {
-//                 const {firstName,location} = doc.data()
-//                 users.push({
-//                     id: doc.id,
-//                     firstName,
-//                     location                 
-//                 })
-//             });
-//             setUsers(users)
-//         }
-//      )
-//     }, [])
-    
-
-//   return (
-//     <View>
-//       <FlatList
-//         style={{ height: 100 }}
-//         data={users}
-//         numColumns={1}
-//         renderItem={({ item }) => (
-//           <Pressable>
-//             <View>
-//               <Text>Hello {item.firstName}</Text>
-//               <Text>{item.location}</Text>
-//             </View>
-//           </Pressable>
-//         )}
-//       />
-//     </View>
-//   );
-// }
-
-// export default Fetch
-
-// const styles = StyleSheet.create({})
-
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { firebase } from "../config";
-import { FlatList } from "react-native-gesture-handler";
-import { Pressable } from "react-native";
+import firebase from "firebase/compat";
+import firestore from "@react-native-firebase/firestore";
 
 const Fetch = () => {
-  const [users, setUsers] = useState([]);
+  const [messages, setMessages] = useState([]);
+  // const {uid} = route.params;
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const snapshot = await firebase
-          .database()
-          .ref("driver/JSuLTh1p9CZZeHCOvKlu4iewgdH2/additionalData")
-          .once("value");
-        const data = snapshot.val();
-        if (data) {
-          const users = Object.keys(data).map((key) => ({
-            id: key,
-            vehicleType: data[key].vehicleType,
-            number: data[key].number,
-          }));
-          setUsers(users);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
+    setMessages([
+      {
+        _id: 1,
+        text: "Hello Friend",
+        createdAt: new Date(),
+        user: {
+          _id: 2,
+          name: "React Native",
+          avatar: "https://placeimg.com/140/140/any",
+        },
+      },
+    ]);
   }, []);
 
+  const onSend = (messageArray = []) => {
+    const msg = messageArray[0];
+    const myMsg = {
+      ...msg,
+      sentBy: "JSuLTh1p9CZZeHCOvKlu4iewgdH2",
+      sentTo: "BdDi1wrTmIUxSSK06ZYqUv1ILt12",
+      createdAt: new Date(),
+    };
+    setMessages((previousMessages) =>
+      GiftedChat.append(previousMessages, myMsg)
+    );
+    // firestore()
+    //   .collection("messages")
+    //   .doc()
+    //   .collection("chats")
+    //   .add({ ...myMsg, createdAt: firestore.FieldValue.serverTimestamp() });
+  };
+
   return (
-    <View>
-      <FlatList
-        style={{ height: 50 }}
-        data={users}
-        numColumns={1}
-        renderItem={({ item }) => (
-          <Pressable>
-            <View>
-              <Text>{item.vehicleType}</Text>
-              <Text>{item.number}</Text>
-            </View>
-          </Pressable>
-        )}
-      />
-    </View>
+    <GiftedChat
+      messages={messages}
+      onSend={(messages) => onSend(messages)}
+      user={{
+        _id: 1,
+      }}
+    />
   );
 };
-
 export default Fetch;
-
-const styles = StyleSheet.create({});

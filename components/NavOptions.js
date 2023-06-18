@@ -16,6 +16,12 @@ const data = [
     image: "https://links.papareact.com/3pn",
     screen: "RiderScreen",
   },
+  // {
+  //   id: "789",
+  //   title: "Chat",
+  //   image: "https://links.papareact.com/3pn",
+  //   screen: "Fetch",
+  // },
 ];
 
 const NavOptions = () => {
@@ -42,6 +48,9 @@ const NavOptions = () => {
           </TouchableOpacity>
         )}
       />
+      {/* <TouchableOpacity  style={tw`p-2 pl-6 pb-5 h-40 bg-gray-200 w-40`} onPress={()=>navigation.navigate('Fetch')}>
+        <Text>TH</Text>
+      </TouchableOpacity> */}
     </View>
   );
 };
